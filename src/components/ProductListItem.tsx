@@ -1,6 +1,6 @@
-import { View } from "@/src/components/Themed";
 import Colors from "@/src/constants/Colors";
-import { Image, StyleSheet, Text } from "react-native";
+import { Link } from "expo-router";
+import { Image, Pressable, StyleSheet, Text } from "react-native";
 import { Product } from "../types";
 
 const defaultImageUri =
@@ -12,15 +12,17 @@ type ProductListItemProps = {
 
 const ProductListItem = ({ product }: ProductListItemProps) => {
   return (
-    <View style={styles.container}>
-      <Image
-        source={{ uri: product.image || defaultImageUri }}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>{product.name}</Text>
-      <Text style={styles.price}>${product.price}</Text>
-    </View>
+    <Link href={`/menu/${product.id}`} asChild>
+      <Pressable style={styles.container}>
+        <Image
+          source={{ uri: product.image || defaultImageUri }}
+          style={styles.image}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>{product.name}</Text>
+        <Text style={styles.price}>${product.price}</Text>
+      </Pressable>
+    </Link>
   );
 };
 
