@@ -7,18 +7,25 @@ import { useCart } from "../providers/CartProvider";
 const CartScreen = () => {
   const { items, total } = useCart();
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={items}
         renderItem={({ item }) => <CartListItem cartItem={item} />}
       />
-      <Text style={{ marginTop: 20, fontSize: 30, fontStyle: "italic" }}>
-        Total: ${total}
-      </Text>
+      <Text style={styles.totalPriceText}>Total: ${total}</Text>
       <Button text="Checkout" />
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </View>
   );
 };
 export default CartScreen;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  totalPriceText: {
+    fontSize: 20,
+    marginTop: 20,
+    fontStyle: "italic",
+  },
+});
