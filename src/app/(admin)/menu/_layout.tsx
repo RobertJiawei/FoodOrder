@@ -11,7 +11,7 @@ const Menustack = () => {
         options={{
           title: "Menu",
           headerRight: () => (
-            <Link href="/" asChild>
+            <Link href="/menu/create" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
