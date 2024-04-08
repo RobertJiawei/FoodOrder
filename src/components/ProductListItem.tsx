@@ -3,7 +3,7 @@ import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, Text } from "react-native";
 import { Product } from "../types";
 
-const defaultImageUri =
+export const defaultImageUri =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/peperoni.png";
 
 type ProductListItemProps = {
