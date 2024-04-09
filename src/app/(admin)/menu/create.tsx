@@ -2,14 +2,18 @@ import Button from "@/src/components/Button";
 import { defaultImageUri } from "@/src/components/ProductListItem";
 import Colors from "@/src/constants/Colors";
 import * as ImagePicker from "expo-image-picker";
+import { Stack, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Image, StyleSheet, Text, TextInput, View } from "react-native";
 
 const CreateProductScreen = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [errors, setErrors] = useState("");
   const [image, setImage] = useState<string | null>(null);
+
+  const { id } = useLocalSearchParams();
+  const isUpdating = !!id;
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -47,13 +51,42 @@ const CreateProductScreen = () => {
     return true;
   };
 
+  const onSubmit = () => {
+    isUpdating ? onUpdate() : onCreate();
+  };
+
+  const onUpdate = () => {
+    if (!validateInput()) return;
+    resetFields();
+  };
+
   const onCreate = () => {
     if (!validateInput()) return;
     resetFields();
   };
 
+  const onDelete = () => {
+    console.log("item delete");
+  };
+
+  const confirmDelete = () => {
+    Alert.alert("Confirm", "Are you sure you want to delete this product", [
+      {
+        text: "Cancel",
+      },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: onDelete,
+      },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
+      <Stack.Screen
+        options={{ title: isUpdating ? "Update Product" : " Create Product" }}
+      />
       <Image source={{ uri: image || defaultImageUri }} style={styles.image} />
       <Text style={styles.selectText} onPress={pickImage}>
         Select Image
@@ -76,7 +109,12 @@ const CreateProductScreen = () => {
       />
 
       <Text style={styles.errorsText}>{errors}</Text>
-      <Button text="Create" onPress={onCreate} />
+      <Button text={isUpdating ? "Update" : "Create"} onPress={onSubmit} />
+      {isUpdating && (
+        <Text onPress={confirmDelete} style={styles.deleteText}>
+          Delete
+        </Text>
+      )}
     </View>
   );
 };
@@ -110,6 +148,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontWeight: "bold",
     color: Colors.light.tint,
+    marginVertical: 10,
+  },
+  deleteText: {
+    alignSelf: "center",
+    fontWeight: "bold",
+    color: "red",
     marginVertical: 10,
   },
 });
