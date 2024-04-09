@@ -10,11 +10,13 @@ type OrderListProps = {
   order: Order;
 };
 
+type Segments = "(admin)" | "(user)";
+
 const OrderListItem = ({ order }: OrderListProps) => {
-  const segments = useSegments();
+  const segments = useSegments()[0] as Segments;
 
   return (
-    <Link href={`/orders/${order.id}`} asChild>
+    <Link href={`/${segments}/orders/${order.id}`} asChild>
       <Pressable style={styles.container}>
         <View>
           <Text style={styles.title}>Order: #{order.id}</Text>
@@ -27,6 +29,7 @@ const OrderListItem = ({ order }: OrderListProps) => {
   );
 };
 export default OrderListItem;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",

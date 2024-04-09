@@ -10,10 +10,12 @@ type ProductListItemProps = {
   product: Product;
 };
 
+type Segments = "(admin)" | "(user)";
+
 const ProductListItem = ({ product }: ProductListItemProps) => {
-  const segments: string[] = useSegments();
+  const segments = useSegments()[0] as Segments;
   return (
-    <Link href={`/${segments[0]}/menu/${product.id}`} asChild>
+    <Link href={`/${segments}/menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
         <Image
           source={{ uri: product.image || defaultImageUri }}
