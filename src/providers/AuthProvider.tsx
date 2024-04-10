@@ -40,7 +40,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
           .select("*")
           .eq("id", session.user.id)
           .single();
-        setProfile(data || null);
+        setProfile(data.group || null);
       }
     };
 
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <AuthContext.Provider
-      value={{ session, loading, profile, isAdmin: profile?.group === "ADMIN" }}
+      value={{ session, loading, profile, isAdmin: profile === "ADMIN" }}
     >
       {children}
     </AuthContext.Provider>
