@@ -1,13 +1,13 @@
-import Colors from "@/src/constants/Colors";
+import Colors from "@/constants/Colors";
+import { Tables } from "@/database.types";
 import { Link, useSegments } from "expo-router";
 import { Image, Pressable, StyleSheet, Text } from "react-native";
-import { Product } from "../types";
 
 export const defaultImageUri =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/peperoni.png";
 
 type ProductListItemProps = {
-  product: Product;
+  product: Tables<"products">;
 };
 
 type Segments = "(admin)" | "(user)";

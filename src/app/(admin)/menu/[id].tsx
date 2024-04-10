@@ -1,6 +1,6 @@
-import Colors from "@/src/constants/Colors";
-import { useCart } from "@/src/providers/CartProvider";
-import { PizzaSize } from "@/src/types";
+import Colors from "@/constants/Colors";
+import { useCart } from "@/providers/CartProvider";
+import { PizzaSize } from "@/types";
 import { FontAwesome } from "@expo/vector-icons";
 import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";

@@ -1,6 +1,6 @@
-import Button from "@/src/components/Button";
-import { defaultImageUri } from "@/src/components/ProductListItem";
-import Colors from "@/src/constants/Colors";
+import Button from "@/components/Button";
+import { defaultImageUri } from "@/components/ProductListItem";
+import Colors from "@/constants/Colors";
 import * as ImagePicker from "expo-image-picker";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";

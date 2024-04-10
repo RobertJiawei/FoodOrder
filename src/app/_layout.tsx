@@ -1,4 +1,3 @@
-import { useColorScheme } from "@/src/components/useColorScheme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   DarkTheme,
@@ -9,6 +8,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { useColorScheme } from "react-native";
 import AuthProvider from "../providers/AuthProvider";
 import CartProvider from "../providers/CartProvider";
 import QueryProvider from "../providers/QueryProvider";
