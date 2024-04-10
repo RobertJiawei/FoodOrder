@@ -2,9 +2,10 @@ import Button from "@/src/components/Button";
 import { defaultImageUri } from "@/src/components/ProductListItem";
 import Colors from "@/src/constants/Colors";
 import * as ImagePicker from "expo-image-picker";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { Alert, Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { useInsertProduct } from "../../api/products";
 
 const CreateProductScreen = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,9 @@ const CreateProductScreen = () => {
 
   const { id } = useLocalSearchParams();
   const isUpdating = !!id;
+  const router = useRouter();
+
+  const { mutate: insertProduct } = useInsertProduct();
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -62,7 +66,16 @@ const CreateProductScreen = () => {
 
   const onCreate = () => {
     if (!validateInput()) return;
-    resetFields();
+
+    insertProduct(
+      { name, price: parseFloat(price), image },
+      {
+        onSuccess: () => {
+          resetFields();
+          router.back();
+        },
+      }
+    );
   };
 
   const onDelete = () => {
