@@ -22,9 +22,11 @@ const index = () => {
       <Link href={"/(admin)"} asChild>
         <Button text="Admin" />
       </Link>
-      <Link href={"/sign-in"} asChild>
-        <Button text="Sign in" />
-      </Link>
+      {!session && (
+        <Link href={"/sign-in"} asChild>
+          <Button text="Sign in" />
+        </Link>
+      )}
       <Button
         text="Sign out"
         onPress={async () => await supabase.auth.signOut()}
