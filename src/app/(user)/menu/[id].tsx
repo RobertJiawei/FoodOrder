@@ -1,12 +1,12 @@
 import Button from "@/components/Button";
 import { defaultImageUri } from "@/components/ProductListItem";
+import RemoteImage from "@/components/RemoteImage";
 import { useCart } from "@/providers/CartProvider";
 import { PizzaSize } from "@/types";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
-  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -38,8 +38,9 @@ const ProductDetailsScreen = () => {
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: product.name }} />
-      <Image
-        source={{ uri: product.image || defaultImageUri }}
+      <RemoteImage
+        path={product?.image}
+        fallback={defaultImageUri}
         style={styles.image}
       />
       <Text>Select size</Text>
