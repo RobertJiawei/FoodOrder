@@ -1,6 +1,7 @@
-import Button from "@/src/components/Button";
-import { useCart } from "@/src/providers/CartProvider";
-import { PizzaSize } from "@/src/types";
+import Button from "@/components/Button";
+import { defaultImageUri } from "@/components/ProductListItem";
+import { useCart } from "@/providers/CartProvider";
+import { PizzaSize } from "@/types";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -32,12 +33,15 @@ const ProductDetailsScreen = () => {
 
   if (isLoading) return <ActivityIndicator />;
 
-  if (error) return <Text>Failed to fetch products</Text>;
+  if (error || !product) return <Text>Failed to fetch products</Text>;
 
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: product.name }} />
-      <Image source={{ uri: product.image }} style={styles.image} />
+      <Image
+        source={{ uri: product.image || defaultImageUri }}
+        style={styles.image}
+      />
       <Text>Select size</Text>
       <View style={styles.sizes}>
         {sizes.map((size) => (
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     flex: 1,
-    padding: 10,
+    padding: 5,
   },
   image: {
     width: "100%",

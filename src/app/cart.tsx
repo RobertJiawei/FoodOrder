@@ -5,7 +5,7 @@ import CartListItem from "../components/CartListItem";
 import { useCart } from "../providers/CartProvider";
 
 const CartScreen = () => {
-  const { items, total } = useCart();
+  const { items, total, checkOut } = useCart();
   return (
     <View style={styles.container}>
       <FlatList
@@ -13,7 +13,7 @@ const CartScreen = () => {
         renderItem={({ item }) => <CartListItem cartItem={item} />}
       />
       <Text style={styles.totalPriceText}>Total: ${total}</Text>
-      <Button text="Checkout" />
+      <Button text="Checkout" onPress={checkOut} />
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </View>
   );

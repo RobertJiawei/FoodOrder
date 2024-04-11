@@ -1,13 +1,13 @@
+import { Tables } from "@/database.types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Link, useSegments } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Order } from "../types";
 
 dayjs.extend(relativeTime);
 
 type OrderListProps = {
-  order: Order;
+  order: Tables<"orders">;
 };
 
 type Segments = "(admin)" | "(user)";
