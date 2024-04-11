@@ -1,4 +1,5 @@
 import { useOrderDetails } from "@/app/api/orders";
+import { useUpdateOrderSubscription } from "@/app/api/orders/subscription";
 import OrderItemListItem from "@/components/OrderItemListItem";
 import OrderListItem from "@/components/OrderListItem";
 import { Stack, useLocalSearchParams } from "expo-router";
@@ -15,6 +16,8 @@ const OrderDetailsScreen = () => {
   const id = parseFloat(typeof idString === "string" ? idString : idString[0]);
 
   const { data: order, isLoading, error } = useOrderDetails(id);
+  useUpdateOrderSubscription(id);
+
   if (isLoading) return <ActivityIndicator />;
 
   if (error || !order) return <Text>Failed to fetch</Text>;
